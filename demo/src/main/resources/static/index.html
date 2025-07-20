@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "stylesheet" href = "style.css"></link>
+	</head>
+	<body>
+    <div class = "header">
+      <div class = "header-left">
+        <ul class = "no-bullet">
+          <li>About</li>
+        </ul>
+      </div>
+      <div class = "header-center">
+        <ul class = "no-bullet">
+          <li>ascension.box</li>
+        </ul>
+      </div>
+      <div class = "header-right">
+        <ul class = "no-bullet">
+          <li>
+						<div class = "dropdown">
+							<div class = "dropbtn">Dropdown</div>
+							<ul class = "dropdown-content">
+								
+							</ul>
+						</div>
+					</li>
+        </ul>
+      </div>
+    </div>
+    <div class = "content">
+			<p id = "msg">
+				hello
+			</p>
+			<button onclick = "incrementNumber()">increment</button>
+		</div>
+		<script>
+			async function loadNumber(name) {
+				try {
+					const res = await fetch(`http://localhost:8080/getHelpCounter`);
+					if (!res.ok) throw new Error(res.status);
+					const json = await res.json();
+					document.getElementById('msg').innerText = json.x;
+					console.log(json);
+				} catch (e) {
+					console.error('Error:', e);
+				}
+			}
+			loadNumber();
+
+			async function incrementNumber() {
+				try {
+					const value = 1;
+
+					const response = await fetch("http://localhost:8080/incrementHelpCounter", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ value: value })
+					});
+
+					const data = await response.json();
+					document.getElementById("msg").innerText = data.x;
+				} catch (e) {
+					console.error(e);
+				}
+			}
+		</script>
+	</body>
+</html>

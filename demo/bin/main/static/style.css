@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "Century Gothic";
+    src: url(centurygothic.ttf);
+}
+
+body {
+    margin: 0;
+	font-family: "Century Gothic"
+}
+
+ul {
+    margin: 0;
+}
+
+.header {
+    position: fixed;
+    background-color: black;
+    color: white;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.header-left, .header-center, .header-right {
+    flex: 1;
+    height: 100%;
+}
+
+.header-left {
+    text-align: left;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-left, .header-center, .header-right {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.no-bullet li {
+    list-style-type: none;
+}
+
+.content {
+    box-sizing: border-box;
+    padding-top: calc(30px + 0.5em * 2);
+    overflow-y: auto;
+}
+
+.dropbtn {
+	border: none;
+    background-color: black;
+    height: 100%;
+    text-align: center;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+    background-color: black;
+    height: 100%;
+    min-width: 160px;
+}
+
+.dropdown-content {
+	display: none;
+	position: fixed;
+    justify-items: left;
+    width: 100%;
+}
+
+.dropdown-content div {
+	text-decoration: none;
+	display: block;
+    background-color: black;
+    width: 100%;
+}
+
+.dropdown-content:hover div {background-color: #333;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #333;
+}
