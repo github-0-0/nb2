@@ -1,5 +1,7 @@
 package box.ascension.app;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,17 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    public static class Help {
-        public long x;
-        public Help(long number) {
-            x = number;
-        }
-        public Help increment() {
-            x++;
-            return this;
-        }
-    }
-    public static Help counter = new Help(0);
+    
+    public static AtomicLong counter = new AtomicLong(0);
     
     @RequestMapping("/")
     public String index() {
@@ -27,14 +20,15 @@ public class HomeController {
 
     @GetMapping("/getHelpCounter")
     @ResponseBody
-    public Help getHelpCounter() {
+    public AtomicLong getHelpCounter() {
         return counter;
     }
 
     @PostMapping("/incrementHelpCounter")
     @ResponseBody
-    public Help incrementHelpCounter() {
-        return counter.increment();
+    public AtomicLong incrementHelpCounter() {
+        counter.incrementAndGet();
+        return counter;
     }
 
 }
