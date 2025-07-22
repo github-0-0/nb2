@@ -1,5 +1,7 @@
 package box.ascension.app.nb2.physics.collision.colliders;
 
+import static box.ascension.app.nb2.physics.math.PhysicsUtil.clamp;
+
 import box.ascension.app.nb2.physics.collision.ICollider;
 import box.ascension.app.nb2.physics.collision.shapes.Shapes;
 import box.ascension.app.nb2.physics.collision.shapes.Shapes.Circle;
@@ -29,7 +31,6 @@ public class CircleCollider implements ICollider {
         } else if (other.getShape().isAssignableFrom(Shapes.Rectangle.class)) {
             return new Collision[] {collideCircleVsRectangle(this, (RectangleCollider) other)};
         }
-        // Extend here for other shapes
         return null;
     }
 
@@ -71,7 +72,6 @@ public class CircleCollider implements ICollider {
         Vector2 rectPos = rectCol.getPosition();
         Rectangle rect = rectCol.getRectangle();
 
-        // Find closest point on rectangle to circle center
         double rectHalfWidth = rect.width() / 2;
         double rectHalfHeight = rect.height() / 2;
 
@@ -91,7 +91,4 @@ public class CircleCollider implements ICollider {
         return new Collision(contactPoint, normal, penetration);
     }
 
-    private static double clamp(double val, double min, double max) {
-        return Math.max(min, Math.min(max, val));
-    }
 }
