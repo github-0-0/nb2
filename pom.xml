@@ -51,6 +51,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.ejml</groupId>
+			<artifactId>ejml-simple</artifactId>
+			<version>0.44.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
