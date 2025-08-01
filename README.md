@@ -1,4 +1,1 @@
-TODO:
-- Make game
-- Add physic engine (or implement one by self)
-- Handle database
+well here we go again
