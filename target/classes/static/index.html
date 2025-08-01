@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel = "stylesheet" href = "style.css"></link>
+		<link rel="stylesheet" href="style.css"></link>
 	</head>
 	<body>
-    <div class = "header">
-      <div class = "header-left">
-        <ul class = "no-bullet">
-          <li>About</li>
-        </ul>
-      </div>
-      <div class = "header-center">
-        <ul class = "no-bullet">
-          <li>ascension.box</li>
-        </ul>
-      </div>
-      <div class = "header-right">
-        <ul class = "no-bullet">
-          <li>
-						<div class = "dropdown">
-							<div class = "dropbtn">Dropdown</div>
-							<ul class = "dropdown-content">
-								
-							</ul>
-						</div>
+		<div class="header">
+			<div class="header-left">
+				<ul class="no-bullet">
+					<li>Home</li>
+				</ul>
+			</div>
+			<div class="header-center">
+				<ul class="no-bullet">
+					<li>ascension.box</li>
+				</ul>
+			</div>
+			<div class="header-right">
+				<ul class="no-bullet">
+					<li class="hoverable">
+						<a href="/console">
+							Console
+						</a>
 					</li>
-        </ul>
-      </div>
-    </div>
-    <div class = "content">
-			<p id = "msg">
+					<li class="hoverable">
+						<a href="/nb2">
+							nb2
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<canvas id="canvas1"></canvas>
+			<script src="canvasDrawer1.js"></script>
+
+			<p id="msg">
 				hello
 			</p>
-			<button onclick = "incrementNumber()">increment</button>
+			<button onclick="incrementNumber()">increment</button>
 		</div>
 		<script>
 			async function loadNumber(name) {
 				try {
-					const res = await fetch(`http://localhost:8080/getHelpCounter`);
+					const res=await fetch(`http://localhost:8080/getHelpCounter`);
 					if (!res.ok) throw new Error(res.status);
-					const json = await res.json();
-					document.getElementById('msg').innerText = json.x;
+					const json=await res.json();
+					document.getElementById('msg').innerText=json.value;
 					console.log(json);
 				} catch (e) {
 					console.error('Error:', e);
@@ -50,9 +55,9 @@
 
 			async function incrementNumber() {
 				try {
-					const value = 1;
+					const value=1;
 
-					const response = await fetch("http://localhost:8080/incrementHelpCounter", {
+					const response=await fetch("http://localhost:8080/incrementHelpCounter", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -60,8 +65,8 @@
 						body: JSON.stringify({ value: value })
 					});
 
-					const data = await response.json();
-					document.getElementById("msg").innerText = data.x;
+					const data=await response.json();
+					document.getElementById("msg").innerText=data;
 				} catch (e) {
 					console.error(e);
 				}

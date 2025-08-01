@@ -1,0 +1,14 @@
+{
+    "env": {
+        "JAVA_HOME": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home"
+    },
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Application",
+            "request": "launch",
+            "mainClass": "box.ascension.app.Application",
+            "projectName": "app"
+        }
+    ]
+}

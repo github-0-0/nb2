@@ -14,7 +14,7 @@ public class HomeController {
     public static AtomicLong counter = new AtomicLong(0);
     
     @RequestMapping("/")
-    public String index() {
+    public String page() {
         return "index.html";
     }
 

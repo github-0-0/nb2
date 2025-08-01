@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fill Remaining Page</title>
+        <style>
+            @font-face {
+                font-family: "Century Gothic";
+                src: url(centurygothic.ttf);
+            }
+            body {
+                margin: 0;
+                font-family: "Century Gothic"
+            }
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+            header {
+                background: #ccc;
+                padding: 20px;
+            }
+            .fill-rest {
+                flex: 1;
+                background: #e0f7fa;
+                padding: 20px;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <form id="myForm" style="margin: 10px">
+                <input type="text" name="textInput" />
+                <button type="submit">Submit</button>
+            </form>
+        </header>
+        <div class="fill-rest" id="content">
+            
+        </div>
+        <script>
+            $("#myForm").on("submit", function(e) {
+                e.preventDefault();
+                const formData = $(this).serialize();
+                $.post("/submit", formData, function(response) {
+                    addBreak();
+                    addParagraph(response);
+                });
+            });
+
+            function addParagraph(cont) {
+                const p = document.createElement('p');
+                p.textContent = cont;
+                document.getElementById('content').prepend(p);
+            }
+
+            function addBreak() {
+                const p = document.createElement('hr');
+                document.getElementById('content').prepend(p);
+            }
+        </script>
+    </body>
+</html>
+
+
+
+
+
