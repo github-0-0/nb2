@@ -4,6 +4,7 @@ import box.ascension.app.nb2.physics.Vector2d;
 import box.ascension.app.nb2.physics.PhysicsUtil.BoundingBox;
 import box.ascension.app.nb2.physics.PhysicsUtil.Impulse;
 import box.ascension.app.nb2.physics.PhysicsSim;
+import box.ascension.app.nb2.physics.PhysicsUtil;
 
 public abstract class Collider {
 
@@ -16,6 +17,8 @@ public abstract class Collider {
     public double staticFriction = 0;
     public double dynamicFriction = 0;
     public double bounciness = 0;
+    public double percentPenetration = 0.8;
+    public double slop = 0.01;
     public final Vector2d translationVel = new Vector2d(0, 0);
     public double omega = 0;
     public final Vector2d position = new Vector2d(0, 0);
@@ -63,7 +66,7 @@ public abstract class Collider {
         // 6. Restitution
         double e = Math.min(this.bounciness, B.bounciness);
         double impulseNormal = 0;
-        if (vRelNorm < 0) {
+        if (vRelNorm < -PhysicsUtil.EPS * 10) {
             impulseNormal = -(1 + e) * vRelNorm / invMassNorm;
         }
     
@@ -93,8 +96,21 @@ public abstract class Collider {
         // 10. Total impulse
         Vector2d J = Jn.added(Jt);
 
-        impulse(new Impulse(J.scaled(1.0 / this.mass), radA.cross(J) / this.moment));
-        c.other.impulse(new Impulse(J.scaled(-1.0 / B.mass), -radB.cross(J) / B.moment));
+        impulse(
+            new Impulse(J.scaled(1.0 / this.mass), radA.cross(J) / this.moment));
+        c.other.impulse(
+            new Impulse(J.scaled(-1.0 / B.mass), -radB.cross(J) / B.moment));
+
+        double penetration = Math.max(c.penetration - slop, 0.0);
+
+        double invMassSum = (1.0 / this.mass) + (1.0 / B.mass);
+        if (invMassSum > 0) {
+            double correctionMag = (percentPenetration * penetration) / invMassSum;
+            Vector2d correction = normal.scaled(correctionMag);
+
+            position.subtractBy(correction.scaled(1.0 / this.mass));
+            B.position.addBy(correction.scaled(1.0 / B.mass));
+        }
     }
     
 

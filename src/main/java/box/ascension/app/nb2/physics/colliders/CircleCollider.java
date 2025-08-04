@@ -36,7 +36,7 @@ public class CircleCollider extends Collider {
             CircleCollider o = (CircleCollider) collider;
             if (bounds.isOverlapping(o.bounds)) {
                 Vector2d delta = o.position.subtracted(position);
-                double penetration = delta.getMagnitude() - radius - o.radius;
+                double penetration = radius + o.radius - delta.getMagnitude() ;
                 Vector2d center = position.added(delta.scaled(0.5));
                 if (penetration >= 0) {
                     return new Collision(

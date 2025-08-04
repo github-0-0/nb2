@@ -25,7 +25,7 @@ public class PhysicsSim {
 
     public static AtomicLong instances = new AtomicLong(0);
     public long id;
-    public final double dt = 1.0 / 5.0;
+    public final double dt = 1.0 / 25.0;
     public PhysicsThread physicsThread;
     public double timeElapsed = 0;
     public ArrayList<Collider> colliders = new ArrayList<>();
