@@ -1,25 +1,43 @@
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 canvas.style.backgroundColor = "black";
-canvas.width = canvas.parentElement.clientWidth - 1;
-canvas.height = canvas.parentElement.clientHeight - 1;
+canvas.width = canvas.parentElement.clientWidth;
+canvas.height = canvas.parentElement.clientHeight;
 
 const bounds = [[0, 0], [canvas.width, canvas.height]];
 
 var mouseX = 0;
-var mouseY = 0;let isMouseDown = false;
+var mouseY = 0;
+var isLeftDown = false;
+var isRightDown = false;
 
-canvas.addEventListener('mousedown', () => {
-    isMouseDown = true;
+var counter = 0;
+
+canvas.addEventListener('mousedown', (e) => {
+    if (e.button === 0) {
+        isLeftDown = true;
+    } else if (e.button === 2) {
+        isRightDown = true;
+    }
 });
 
-canvas.addEventListener('mouseup', () => {
-    isMouseDown = false;
+canvas.addEventListener('mouseup', (e) => {
+    if (e.button === 0) {
+        isLeftDown = false;
+    } else if (e.button === 2) {
+        isRightDown = false;
+    }
 });
 
 canvas.addEventListener('mouseleave', () => {
-    isMouseDown = false;
+    isLeftDown = false;
+    isRightDown = false;
 });
+
+canvas.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
 
 canvas.addEventListener('mousemove', (event) => {
     const rect = canvas.getBoundingClientRect();
@@ -47,8 +65,8 @@ class Particle {
     move() {
         this.x += this.vx;
         this.y += this.vy;
-        this.x = trueModulo(this.x, bounds[1][0]);
-        this.y = trueModulo(this.y, bounds[1][1]);        
+        // this.x = trueModulo(this.x, bounds[1][0]);
+        // this.y = trueModulo(this.y, bounds[1][1]);        
         // if (Math.random() < 0.00003) {
         //     this.x += Math.random() * 100 - 50;
         //     this.y += Math.random() * 100 - 50;
@@ -64,7 +82,10 @@ class Particle {
 const particles = [];
 
 function spawnParticle(x, y, color = 'lightgray') {
-    var i = particles.length;
+    if (particles.length > 3000) {
+        particles.shift();
+    }
+    var i = counter++;
     var vx = Math.cos(i) * (1 + i/10000) * 0.5;
     var vy = Math.sin(i) * (1 + i/10000) * 0.5;
 
@@ -95,7 +116,7 @@ function renderParticles(particles) {
     particles.forEach(particle => {
         ctx.lineTo(particle.x, particle.y);
     });
-    ctx.strokeStyle = `rgb(100, 100, 255, ${25/particles.length + 0.1})`;
+    ctx.strokeStyle = `rgb(100, 100, 255, ${/*25/particles.length + 0.1*/ 0.5})`;
     ctx.stroke();
 } 
 
@@ -110,17 +131,25 @@ function renderTitle() {
     ctx.fillText(text, centerX, centerY);
 }
 
+var lastTime = 0;
 
 setInterval(() => {
     renderParticles(particles);
     renderTitle();
     moveParticles(particles);        
-    if (isMouseDown) {
-        spawnParticle(mouseX, mouseY, 'darkblue');
-    }
-    if (Math.random() < 0.1 - particles.length / 30000) {
+    // if (isLeftDown) {
+    //     spawnParticle(mouseX, mouseY, 'darkblue');
+    // }
+    // if (isRightDown && (Date.now() - lastTime) > 1000) {
+    //     for (let i = 0; i < 400; i++) {
+    //         spawnParticle(mouseX, mouseY, 'midnightblue');
+    //         lastTime = Date.now();
+    //     }
+    // }
+    if ((Date.now() - lastTime) > 1000 / 15) {
         spawnParticle(
             bounds[1][0]/2,
             bounds[1][1]/2);
+            lastTime = Date.now();
     }
 }, 1000/60);

@@ -7,11 +7,13 @@ public class Collision {
     public Vector2d position;
     public Vector2d normal;
     public Collider other;
-    
-    public Collision(Vector2d position, Vector2d normal, Collider other) {
+    public double penetration;
+
+    public Collision(Vector2d position, Vector2d normal, Collider other, double penetration) {
         this.position = position;
         this.normal = normal;
         this.other = other;
+        this.penetration = penetration;
     }
 
 }

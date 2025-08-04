@@ -37,9 +37,14 @@ public class ConsoleController {
         commands.put(Pattern.compile("^start$"), matcher -> {
             System.out.println("Starting...");
             var sim = GameManager.startSim(0);
-            var circle = new CircleCollider(30, new Vector2d(0, 0), 10);
-            sim.addObject(circle);
-            circle.impulse(new Impulse(new Vector2d(0, 10), 0));
+            var circle = new CircleCollider(30, new Vector2d(60, 0), 10);
+            circle.impulse(new Impulse(new Vector2d(0, 1), 0));
+            var circle2 = new CircleCollider(30, new Vector2d(60, 80), 10);
+            sim.addObjects(circle, circle2);
+            circle2.impulse(new Impulse(new Vector2d(0, -1), 0));
+            circle.bounciness = 1;
+            circle2.bounciness = 1;
+            sim.start();
         });
 
         commands.put(Pattern.compile("^echo\\s+(\\w+)$"), matcher -> {

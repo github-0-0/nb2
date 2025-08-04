@@ -1,6 +1,7 @@
 package box.ascension.app.nb2.physics;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
@@ -17,13 +18,14 @@ public class PhysicsSim {
 
     public static record SimState(
         long id,
+        double dt,
         double timeElapsed,
         ArrayList<Collider> colliderStates
     ) {}
 
     public static AtomicLong instances = new AtomicLong(0);
     public long id;
-    public final double dt = 0.0666666667;
+    public final double dt = 1.0 / 5.0;
     public PhysicsThread physicsThread;
     public double timeElapsed = 0;
     public ArrayList<Collider> colliders = new ArrayList<>();
@@ -39,7 +41,7 @@ public class PhysicsSim {
 
     @JsonProperty("simState")
     public SimState getState() {
-        return new SimState(id, timeElapsed, colliders);
+        return new SimState(id, dt, timeElapsed, colliders);
     }
 
     public void start() {
@@ -56,6 +58,11 @@ public class PhysicsSim {
 
     public Collider addObject(Collider o) {
         physicsThread.post(() -> colliders.add(o));
+        return o;
+    }
+
+    public Collider[] addObjects(Collider... o) {
+        physicsThread.post(() -> colliders.addAll(List.of(o)));
         return o;
     }
 

@@ -22,44 +22,43 @@ public class PhysicsUtil {
 
     public static class BoundingBox {
 
-        public Vector2d min;
-        public Vector2d max;
-
-        public Vector2d position;
-        public Vector2d dimensions;
-
-        public BoundingBox(Vector2d min, Vector2d max, boolean alt) {
-            if (alt) {
-                this.min = min;
-                this.max = max;
-                this.position = min;
-                this.dimensions = max.subtracted(min);            
-            } else {
-                throw new IllegalArgumentException("What do you think that boolean was for");
-            }
-        }
-
+        public final Vector2d position;
+        public final Vector2d dimensions;
+    
         public BoundingBox(Vector2d position, Vector2d dimensions) {
-            this.min = position;
-            this.max = position.added(dimensions);
             this.position = position;
             this.dimensions = dimensions;
         }
-
-        public boolean isOverlapping(BoundingBox o) {
-            move();
-            return !(o.min.x > this.max.x 
-                || o.max.x < this.min.x 
-                || o.min.y > this.max.y 
-                || o.max.y < this.min.y);
+    
+        public static BoundingBox fromMinMax(Vector2d min, Vector2d max) {
+            return new BoundingBox(min, max.subtracted(min));
         }
-
-        public void move() {
-            this.min = position;
-            this.max = position.added(dimensions);
+    
+        public Vector2d getMin() {
+            return position;
+        }
+    
+        public Vector2d getMax() {
+            return position.added(dimensions);
+        }
+    
+        public boolean isOverlapping(BoundingBox o) {
+            return this.position.x <= o.position.x + o.dimensions.x &&
+                o.position.x <= this.position.x + this.dimensions.x &&
+                this.position.y <= o.position.y + o.dimensions.y &&
+                o.position.y <= this.position.y + this.dimensions.y;
+        }
+    
+        public Vector2d getPosition() {
+            return position;
+        }
+    
+        public Vector2d getDimensions() {
+            return dimensions;
         }
 
     }
+    
 
     public static record Impulse(Vector2d pos, double alpha) {}
     

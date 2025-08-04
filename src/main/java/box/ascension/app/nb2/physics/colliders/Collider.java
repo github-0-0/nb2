@@ -1,6 +1,5 @@
 package box.ascension.app.nb2.physics.colliders;
 
-import box.ascension.app.nb2.physics.PhysicsUtil;
 import box.ascension.app.nb2.physics.Vector2d;
 import box.ascension.app.nb2.physics.PhysicsUtil.BoundingBox;
 import box.ascension.app.nb2.physics.PhysicsUtil.Impulse;
@@ -17,9 +16,9 @@ public abstract class Collider {
     public double staticFriction = 0;
     public double dynamicFriction = 0;
     public double bounciness = 0;
-    public Vector2d translationVel = Vector2d.ZERO;
+    public final Vector2d translationVel = new Vector2d(0, 0);
     public double omega = 0;
-    public Vector2d position;
+    public final Vector2d position = new Vector2d(0, 0);
     public double angle;
     public BoundingBox bounds;
     
@@ -93,14 +92,9 @@ public abstract class Collider {
     
         // 10. Total impulse
         Vector2d J = Jn.added(Jt);
-    
-        // 11. Apply impulse to this (A)
-        this.translationVel = this.translationVel.added(J.scaled(1.0 / this.mass));
-        this.omega += radA.cross(J) / this.moment;
-    
-        // 12. Apply inverse impulse to B
-        B.translationVel = B.translationVel.subtracted(J.scaled(1.0 / B.mass));
-        B.omega -= radB.cross(J) / B.moment;
+
+        impulse(new Impulse(J.scaled(1.0 / this.mass), radA.cross(J) / this.moment));
+        c.other.impulse(new Impulse(J.scaled(-1.0 / B.mass), -radB.cross(J) / B.moment));
     }
     
 

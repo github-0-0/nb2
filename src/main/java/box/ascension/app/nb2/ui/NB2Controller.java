@@ -13,12 +13,14 @@ public class NB2Controller {
         
     @RequestMapping("/nb2")
     public String page() {
+        GameManager.initCleanerThread(); // TODO: ts patchy
         return "nb2.html";
     }
 
     @GetMapping("/getGame")
     @ResponseBody
     public PhysicsSim getGame(@RequestParam long id) {
+        System.out.println(id + " game requested");
         return GameManager.sims.get(id);
     }
 

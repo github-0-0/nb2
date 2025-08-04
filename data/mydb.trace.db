@@ -442,3 +442,63 @@ create global temporary table HTE_neuron(accel integer, rn_ integer not null, sp
 2025-07-31 19:32:21.677578-07:00 jdbc[23]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
 create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-01 20:54:40.976433-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-01 20:54:41.024571-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-01 20:57:13.543212-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-01 20:57:13.546394-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:01:57.188718-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:01:57.196153-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:02:59.536755-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:02:59.540012-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:33:29.153413-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:33:29.157693-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:34:35.715604-07:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:34:35.717374-07:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:35:02.532178-07:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-02 18:35:02.533080-07:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:19:57.463967-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:19:57.467887-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:20:11.056789-07:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:20:11.057742-07:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:25:04.479760-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_NEURON" already exists; SQL statement:
+create global temporary table HTE_neuron(accel integer, rn_ integer not null, speed integer, strength integer, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-08-03 18:25:04.483008-07:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_TEAM" already exists; SQL statement:
+create global temporary table HTE_team(credits integer, rating integer, rn_ integer not null, id bigint, name varchar(255), neurons varbinary(255), primary key (rn_)) TRANSACTIONAL [42101-232]

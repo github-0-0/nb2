@@ -11,10 +11,7 @@ body {
     margin: 0;
 	font-family: "Century Gothic";
     height: 100%;
-}
-
-ul {
-    margin: 0;
+    overflow: hidden;
 }
 
 a {
@@ -52,6 +49,7 @@ a {
 
 .header-right {
     text-align: right;
+    flex-direction: row-reverse;
 }
 
 .header-left, .header-center, .header-right {
@@ -64,12 +62,24 @@ a {
     list-style-type: none;
 }
 
+ul {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .content {
     display: block;
     box-sizing: border-box;
     margin-top: calc(30px + 0.5em * 2 + 14px);
-    overflow-y: auto;
+    overflow: auto;
     height: calc(100% - (30px + 0.5em * 2 + 14px));
+    scrollbar-width: thin;
+}
+
+.content::-webkit-scrollbar {
+    display: none;
 }
 
 .hoverable {
@@ -78,4 +88,8 @@ a {
 
 .hoverable:hover {
     background-color: #333;
+}
+
+.content div {
+    overflow: auto;
 }

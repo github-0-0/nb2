@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Fill Remaining Page</title>
+        <title>Console</title>
         <style>
             @font-face {
                 font-family: "Century Gothic";
@@ -43,14 +43,29 @@
             
         </div>
         <script>
-            $("#myForm").on("submit", function(e) {
+            document.getElementById("myForm").addEventListener("submit", function(e) {
                 e.preventDefault();
-                const formData = $(this).serialize();
-                $.post("/submit", formData, function(response) {
+
+                const formData = new FormData(this);
+                const params = new URLSearchParams();
+                for (const [key, value] of formData) {
+                    params.append(key, value);
+                }
+
+                fetch("/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: params.toString(),
+                })
+                .then(response => response.text())
+                .then(responseText => {
                     addBreak();
-                    addParagraph(response);
+                    addParagraph(responseText);
                 });
             });
+
 
             function addParagraph(cont) {
                 const p = document.createElement('p');

@@ -63,6 +63,11 @@ public class Vector2d implements Cloneable {
         return Math.sqrt(x * x + y * y);
     }
 
+    public void set(Vector2d o) {
+        this.x = o.x;
+        this.y = o.y;
+    }
+
     @JsonIgnore
     public Vector2d getNorm() {
         if (PhysicsUtil.epsilonEquals(0, getMagnitude())) {

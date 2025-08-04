@@ -3,7 +3,6 @@ package box.ascension.app.nb2.physics.colliders;
 import box.ascension.app.Util.JsonWhitelist;
 import box.ascension.app.nb2.physics.Vector2d;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import box.ascension.app.nb2.physics.PhysicsUtil.BoundingBox;
@@ -14,7 +13,9 @@ public class CircleCollider extends Collider {
     public static record CircleColliderState(
         double radius,
         Vector2d position,
+        Vector2d velocity,
         double angle,
+        double omega,
         String type
     ) implements ColliderState {}
 
@@ -24,9 +25,9 @@ public class CircleCollider extends Collider {
         this.mass = mass;
         this.moment = 0.5 * mass * radius * radius;
         this.radius = radius;
-        this.position = position;
+        this.position.set(position);
         this.bounds = new BoundingBox(
-            position, new Vector2d(radius * 2, radius * 2));
+            this.position, new Vector2d(radius * 2, radius * 2));
     }
 
     @Override
@@ -41,7 +42,8 @@ public class CircleCollider extends Collider {
                     return new Collision(
                         center, 
                         center.added(delta.scaled(0.5)).getNorm(), 
-                        collider);
+                        collider,
+                        penetration);
                 } else {
                     return null;
                 }
@@ -55,7 +57,7 @@ public class CircleCollider extends Collider {
     @Override
     @JsonProperty("collider")
     public ColliderState getState() {
-        return new CircleColliderState(radius, position, angle, "circle");
+        return new CircleColliderState(radius, position, translationVel, angle, omega, "circle");
     }
 
 }
