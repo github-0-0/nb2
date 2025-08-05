@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import box.ascension.app.nb2.physics.PhysicsSim;
 
+@Deprecated
 public class GameManager {
     
     public static ConcurrentHashMap<Long, PhysicsSim> sims 

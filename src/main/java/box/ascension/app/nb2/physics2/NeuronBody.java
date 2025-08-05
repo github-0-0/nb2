@@ -7,30 +7,42 @@ import org.dyn4j.dynamics.Body;
 import org.dyn4j.dynamics.BodyFixture;
 import org.dyn4j.geometry.Geometry;
 import org.dyn4j.geometry.MassType;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import box.ascension.app.DataAccessingService;
 import box.ascension.app.nb2.game.neurons.Neuron;
 
 public class NeuronBody extends Body {
 
-    @Autowired
-    private static DataAccessingService dataAccessingService;
-
     public long id;
     public Neuron neuron;
     public double size;
 
+    /**
+     * Creates a neuron with such id
+     * @param id The neuron id
+     * @return
+     */
     public static NeuronBody of(long id) {
-        var optionalNeuron = dataAccessingService.getNeuron(id);
+        var optionalNeuron = DataAccessingService.instance.getNeuron(id);
         if (optionalNeuron.isPresent()) {
             var neuron = optionalNeuron.get();
-            return new NeuronBody(id, 30, 2.7, 0.5, 0.5);
+            return switch (neuron.neuronType) {
+                case STANDARD -> new NeuronBody(id, 30, 2.7, 0.5, 0.5);
+                default -> new NeuronBody(id, 30, 2.7, 0.5, 0.5);
+            };
         } else {
             throw new IllegalArgumentException("Cannot find neuron with such id");
         }
     }
 
+    /**
+     * Creates a neuron physics body
+     * @param id The neuron id
+     * @param size The radius of the neuron
+     * @param density The density of the neuron
+     * @param friction The friction coefficient
+     * @param restitution The bounciness
+     */
     private NeuronBody(long id, double size, double density, double friction, double restitution) {
         this.id = id;
         this.size = size;
@@ -41,6 +53,10 @@ public class NeuronBody extends Body {
         setMass(MassType.NORMAL);
     }
 
+    /**
+     * Increases the size
+     * @param factor The factor in which the size increases
+     */
     public void scale(double factor) {
         size *= factor;
         List<BodyFixture> old = new ArrayList<>(this.getFixtures());

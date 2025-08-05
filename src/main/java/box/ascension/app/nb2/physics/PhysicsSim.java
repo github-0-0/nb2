@@ -13,6 +13,7 @@ import box.ascension.app.nb2.physics.colliders.Collider;
 import box.ascension.app.nb2.physics.colliders.Collider.ColliderState;
 import box.ascension.app.nb2.physics.colliders.Collision;
 
+@Deprecated
 @JsonWhitelist
 public class PhysicsSim {
 

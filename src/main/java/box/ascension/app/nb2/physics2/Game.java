@@ -69,6 +69,12 @@ public class Game {
     public double frameWidth = 10;
     public double frameHeight = 6;
 
+    /**
+     * Creates a game
+     * @param id The game id
+     * @param team1NeuronIds The active neurons on team 1
+     * @param team2NeuronIds The active neurons on team 2
+     */
     public Game(long id, List<Long> team1NeuronIds, List<Long> team2NeuronIds) {
         this.id = id;
         this.team1NeuronIds = team1NeuronIds;
@@ -96,6 +102,9 @@ public class Game {
         gameThread = new GameThread();
     }
 
+    /**
+     * Starts the game
+     */
     public void start() {
         if(!active) {
             active = true;
@@ -104,6 +113,9 @@ public class Game {
         }
     }
 
+    /**
+     * Stops the game
+     */
     public void stop() {
         gameThread.post(() -> active = false);
     }
